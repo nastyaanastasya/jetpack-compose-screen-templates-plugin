@@ -9,11 +9,9 @@ plugins {
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.8.0"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.12.0"
+    id("org.jetbrains.intellij") version "1.13.1"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "2.0.0"
-    // Gradle Qodana Plugin
-    id("org.jetbrains.qodana") version "0.1.13"
     // Gradle Kover Plugin
     id("org.jetbrains.kotlinx.kover") version "0.6.1"
 }
@@ -41,18 +39,16 @@ intellij {
     plugins.set(properties("platformPlugins").split(',').map(String::trim).filter(String::isNotEmpty))
 }
 
+
 // Configure Gradle Changelog Plugin - read more: https://github.com/JetBrains/gradle-changelog-plugin
 changelog {
     groups.set(emptyList())
     repositoryUrl.set(properties("pluginRepositoryUrl"))
 }
 
-// Configure Gradle Qodana Plugin - read more: https://github.com/JetBrains/gradle-qodana-plugin
-qodana {
-    cachePath.set(file(".qodana").canonicalPath)
-    reportPath.set(file("build/reports/inspections").canonicalPath)
-    saveReport.set(true)
-    showReport.set(System.getenv("QODANA_SHOW_REPORT")?.toBoolean() ?: false)
+dependencies {
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.4")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.6.21")
 }
 
 // Configure Gradle Kover Plugin - read more: https://github.com/Kotlin/kotlinx-kover#configuration
