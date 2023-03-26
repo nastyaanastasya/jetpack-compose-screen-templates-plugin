@@ -19,6 +19,11 @@
                         text="Login Screen Template"
                         description="Creates Compose login screen template"
                         class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.login.LoginAction"/>
+                <action
+                        id="ComposeScreenTemplates.Registration"
+                        text="Registration Screen Template"
+                        description="Creates Compose registration screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.registration.RegistrationAction"/>
             </group>
 
         </group>

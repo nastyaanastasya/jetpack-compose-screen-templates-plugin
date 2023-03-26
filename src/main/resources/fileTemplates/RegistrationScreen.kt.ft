@@ -3,6 +3,9 @@ package $PACKAGE_NAME
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
+import androidx.compose.foundation.layout.Row
+#end
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
@@ -21,7 +24,7 @@ import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextField
 #end
 import androidx.compose.material.Text
-#if (${USE_FORGET_PASSWORD_TEXT} == "true")
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
 import androidx.compose.material.TextButton
 #end
 #if (${USE_TRAILING_ICON} == "true")
@@ -56,16 +59,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun LoginScreen(
+fun RegistrationScreen(
 
 ) {
     val focusManager = LocalFocusManager.current
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    #if (${USE_REP_PASSWORD} == "true")
-    var repPassword by rememberSaveable { mutableStateOf("") }
-    #end
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -82,7 +82,7 @@ fun LoginScreen(
             ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            LoginText(value = "Login")
+            RegistrationText(value = "Registration")
 
             // email
             EmailField(
@@ -101,32 +101,22 @@ fun LoginScreen(
                 focusManager = focusManager,
                 onValueChange = { password = it }
             )
-            #if (${USE_REP_PASSWORD} == "true")
 
-            PasswordField(
-                label = "Repeat password",
-                value = "",
-                placeholder = "repeat password",
-                focusManager = focusManager,
-                onValueChange = { repPassword = it }
-            )
-            #end
-
-            LoginButton(
-                label = "Sign In",
+            RegistrationButton(
+                label = "Sign Up",
                 focusManager = focusManager,
                 onClick = { /*TODO*/ }
             )
-            #if (${USE_FORGET_PASSWORD_TEXT} == "true")
+            #if (${USE_ALREADY_REGISTERED_TEXT} == "true")
 
-            ForgetPasswordText()
+            LoginText()
             #end
         }
     }
 }
 
 @Composable
-private fun LoginText(
+private fun RegistrationText(
     value: String
 ) {
     Text(
@@ -181,12 +171,13 @@ private fun PasswordField(
     focusManager: FocusManager,
     onValueChange: (String) -> Unit,
 ) {
-    #if (${USE_TRAILING_ICON} == "true")
+#if (${USE_TRAILING_ICON} == "true")
     val isVisible by remember {
         derivedStateOf {
             value.isNotBlank()
         }
     }
+
     var visibility by remember { mutableStateOf(false) }
     val trailingIcon = if (visibility) {
         Icons.Filled.Visibility
@@ -247,7 +238,7 @@ private fun PasswordField(
 }
 
 @Composable
-private fun LoginButton(
+private fun RegistrationButton(
     label: String,
     focusManager: FocusManager,
     onClick: () -> Unit
@@ -270,27 +261,37 @@ private fun LoginButton(
         )
     }
 }
-#if (${USE_FORGET_PASSWORD_TEXT} == true)
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
 
 @Composable
-private fun ForgetPasswordText() {
-    TextButton(
-        onClick = { /*TODO*/ }
+private fun LoginText() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = "Forget password?",
+            text = "Already registered?",
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.primary
+            color = MaterialTheme.colorScheme.secondary
         )
+        TextButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Text(
+                text = "Sign In",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
     }
 }
 #end
 
+
 @Preview(
     showBackground = true,
-    name = "Login screen"
+    name = "Registration screen"
 )
 @Composable
-private fun LoginScreenPreview() {
-    LoginScreen()
+private fun RegistrationScreenPreview() {
+    RegistrationScreen()
 }
