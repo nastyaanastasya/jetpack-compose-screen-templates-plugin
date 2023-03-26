@@ -11,6 +11,7 @@
             <add-to-group group-id="NewGroup" anchor="first"/>
 
             <group id="JetpackCompose.NewMenu.Screen"
+                   icon="/icons/icon_small.svg"
                    popup="true"
                    text="Jetpack Compose Screen Templates">
 
