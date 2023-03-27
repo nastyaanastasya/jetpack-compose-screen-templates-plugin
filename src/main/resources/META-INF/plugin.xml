@@ -16,6 +16,16 @@
                    text="Jetpack Compose Screen Templates">
 
                 <action
+                        id="ComposeScreenTemplates.Chat"
+                        text="Chat Screen Template"
+                        description="Creates Compose chat screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.chat.ChatAction"/>
+                <action
+                        id="ComposeScreenTemplates.List"
+                        text="List Screen Template"
+                        description="Creates Compose list screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.list.ListAction"/>
+                <action
                         id="ComposeScreenTemplates.Login"
                         text="Login Screen Template"
                         description="Creates Compose login screen template"
@@ -25,11 +35,6 @@
                         text="Registration Screen Template"
                         description="Creates Compose registration screen template"
                         class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.registration.RegistrationAction"/>
-                <action
-                        id="ComposeScreenTemplates.List"
-                        text="List Screen Template"
-                        description="Creates Compose list screen template"
-                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.list.ListAction"/>
             </group>
 
         </group>

@@ -8,6 +8,7 @@ object PropertyKeys {
     const val UseForgetPasswordText = "USE_FORGET_PASSWORD_TEXT"
 
     const val UseOutlinedTextField = "USE_OUTLINED_TEXT_FIELD"
+
     const val UseTrailingIcon = "USE_TRAILING_ICON"
 
     const val UseAlreadyRegisteredText = "USE_ALREADY_REGISTERED_TEXT"
@@ -17,4 +18,7 @@ object PropertyKeys {
     const val UseThreeLineListItem = "USE_THREE_LINES_LIST_ITEM"
     const val UseListItemWithImage = "USE_LIST_ITEM_WITH_IMAGE"
     const val UseScrollToTopButton = "USE_SCROLL_TO_TOP_BUTTON"
+
+    const val UseTopAppBarSearchIcon = "USE_TOP_APP_BAR_SEARCH_ICON"
+    const val UseTopAppBarMenuIcon = "USE_TOP_APP_BAR_MENU_ICON"
 }
