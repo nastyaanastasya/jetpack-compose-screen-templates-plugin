@@ -1,0 +1,304 @@
+package $PACKAGE_NAME
+
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountCircle
+#if(${USE_ARROW_BACK_NAVIGATION_ICON} == true)
+import androidx.compose.material.icons.filled.ArrowBack
+#end
+#if(${USE_MENU_NAVIGATION_ICON} == true)
+import androidx.compose.material.icons.filled.Menu
+#end
+#if(${USE_TOP_APP_BAR_OPTIONS_MENU_ICON} == true)
+import androidx.compose.material.icons.filled.MoreVert
+#end
+import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+
+@Composable
+fun ProfileScreen(
+
+) {
+    val focusManager = LocalFocusManager.current
+    val scaffoldState = rememberScaffoldState()
+
+    Scaffold(
+        modifier = Modifier.systemBarsPadding(),
+        scaffoldState = scaffoldState,
+        topBar = { ProfileTopAppBar() },
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(
+                    top = 8.dp,
+                    start = 16.dp,
+                    end = 16.dp
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 32.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                ProfilePostsText(value = "50")
+                Spacer(modifier = Modifier.width(52.dp))
+                ProfileImage(imageUrl = null)
+                Spacer(modifier = Modifier.width(30.dp))
+                ProfileFollowersText(value = "1.2K")
+            }
+            ProfileNameText(value = "Lorem Ipsum")
+            ProfileDescriptionText(value = "Lorem ipsum dolor sit amet")
+            ProfileFollowButton(
+                value = "Follow",
+                focusManager = focusManager,
+                onClick = { /*TODO*/ }
+            )
+        }
+    }
+}
+
+@Composable
+private fun ProfileFollowButton(
+    value: String,
+    focusManager: FocusManager,
+    onClick: () -> Unit
+) {
+    OutlinedButton(
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .fillMaxWidth(),
+        shape = CircleShape,
+        onClick = {
+            onClick()
+            focusManager.clearFocus()
+        },
+        border = BorderStroke(
+            width = 1.dp,
+            color = MaterialTheme.colorScheme.primary
+        )
+    ) {
+        Text(
+            text = value,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Composable
+private fun ProfilePostsText(
+    value: String
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = value,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = "Posts",
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.secondary,
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Composable
+private fun ProfileFollowersText(
+    value: String
+) {
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Text(
+            text = value,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Bold,
+            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodyLarge
+        )
+        Text(
+            text = "Followers",
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Normal,
+            color = MaterialTheme.colorScheme.secondary,
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Composable
+private fun ProfileNameText(
+    value: String
+) {
+    Row(
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = value,
+            fontWeight = FontWeight.SemiBold,
+            style = MaterialTheme.typography.titleLarge,
+            color = MaterialTheme.colorScheme.primary,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+        )
+    }
+}
+
+@Composable
+private fun ProfileDescriptionText(
+    value: String
+) {
+    Row(
+        modifier = Modifier
+            .padding(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(
+            text = value,
+            textAlign = TextAlign.Center,
+            fontWeight = FontWeight.Normal,
+            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.secondary,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+        )
+    }
+}
+
+@Composable
+private fun ProfileImage(
+    imageUrl: String?
+) {
+    if (imageUrl != null) {
+        AsyncImage(
+            modifier = Modifier
+                .height(120.dp)
+                .width(120.dp)
+                .clip(CircleShape),
+            model = imageUrl,
+            contentScale = ContentScale.Crop,
+            contentDescription = "Profile image"
+        )
+    } else {
+        Icon(
+            modifier = Modifier
+                .height(120.dp)
+                .width(120.dp),
+            imageVector = Icons.Default.AccountCircle,
+            tint = MaterialTheme.colorScheme.inversePrimary,
+            contentDescription = "Profile image"
+        )
+    }
+}
+
+@Composable
+private fun ProfileTopAppBar() {
+    TopAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        title = {
+            Text(
+                text = "Profile",
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                maxLines = 1
+            )
+        },
+        navigationIcon = {
+            #if(${USE_MENU_NAVIGATION_ICON} == true)
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.Menu,
+                    contentDescription = "Menu"
+                )
+            }
+            #else
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Arrow back"
+                )
+            }
+            #end
+        },
+        actions = {
+        #if(${USE_TOP_APP_BAR_OPTIONS_MENU_ICON} == true)
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "Options menu"
+                )
+            }
+        #end
+        },
+        backgroundColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface
+    )
+}
+
+@Preview(
+    name = "Profile top bar"
+)
+@Composable
+private fun TopAppBarPreview() {
+    ProfileTopAppBar()
+}
+
+@Preview(
+    name = "Profile image"
+)
+@Composable
+private fun ProfileImagePreview() {
+    ProfileImage(imageUrl = null)
+}
+
+@Preview(
+    showBackground = true,
+    name = "Profile screen"
+)
+@Composable
+private fun ProfileScreenPreview() {
+    ProfileScreen()
+}

@@ -1,4 +1,4 @@
-package com.nastyaanastasya.jetpackcompose.ui.plugin.features.chat
+package com.nastyaanastasya.jetpackcompose.ui.plugin.features.profile
 
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.psi.PsiDirectory
@@ -8,28 +8,27 @@ import com.nastyaanastasya.jetpackcompose.ui.plugin.core.TemplateGenerator
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-class ChatViewModel(
+class ProfileViewModel(
         private val directory: PsiDirectory,
         private val generator: TemplateGenerator,
         private val editorManager: FileEditorManager,
-): BaseViewModel() {
+) : BaseViewModel() {
 
-    var useTopAppBarOptionsMenuIcon = false
-    var useTopAppBarSearchIcon = false
-    var useOutlinedTextField = false
-    var useTextField = true
+    var useArrowBackNavigationIcon = false
+    var useMenuNavigationIcon = true
+    var useOptionsMenuIcon = false
 
     val successFlow = MutableSharedFlow<Unit>()
 
     fun onOkButtonClick() {
         val properties = mutableMapOf<String, Any>(
-                PropertyKeys.UseTopAppBarOptionsMenuIcon to useTopAppBarOptionsMenuIcon,
-                PropertyKeys.UseTopAppBarSearchIcon to useTopAppBarSearchIcon,
-                PropertyKeys.UseOutlinedTextField to useOutlinedTextField
+                PropertyKeys.UseArrowBackNavigationIcon to useArrowBackNavigationIcon,
+                PropertyKeys.UseMenuNavigationIcon to useMenuNavigationIcon,
+                PropertyKeys.UseTopAppBarOptionsMenuIcon to useOptionsMenuIcon
         )
         val file = generator.generateKt(
-                "ChatScreen",
-                "ChatScreen",
+                "ProfileScreen",
+                "ProfileScreen",
                 directory,
                 properties
         )

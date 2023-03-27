@@ -20,5 +20,9 @@ object PropertyKeys {
     const val UseScrollToTopButton = "USE_SCROLL_TO_TOP_BUTTON"
 
     const val UseTopAppBarSearchIcon = "USE_TOP_APP_BAR_SEARCH_ICON"
-    const val UseTopAppBarMenuIcon = "USE_TOP_APP_BAR_MENU_ICON"
+
+    const val UseTopAppBarOptionsMenuIcon = "USE_TOP_APP_BAR_OPTIONS_MENU_ICON"
+
+    const val UseMenuNavigationIcon = "USE_MENU_NAVIGATION_ICON"
+    const val UseArrowBackNavigationIcon = "USE_ARROW_BACK_NAVIGATION_ICON"
 }

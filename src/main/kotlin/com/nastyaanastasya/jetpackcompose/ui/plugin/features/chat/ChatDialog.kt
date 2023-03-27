@@ -33,8 +33,8 @@ class ChatDialog(
             }
             row { label("") }
 
-            row { checkBox("Add search icon to TopAppBar", viewModel::useTopAppBarSearchIcon) }
-            row { checkBox("Add menu icon to TopAppBar", viewModel::useTopAppBarMenuIcon) }
+            row { checkBox("Add search icon on TopAppBar", viewModel::useTopAppBarSearchIcon) }
+            row { checkBox("Add options menu icon on TopAppBar", viewModel::useTopAppBarOptionsMenuIcon) }
 
             noteRow("Creates a chat screen template file 'ChatScreen.kt'")
         }

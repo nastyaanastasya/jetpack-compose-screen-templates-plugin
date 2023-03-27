@@ -4,5 +4,5 @@
 
 ## [Unreleased]
 ## 0.0.1
-### Chat, list, login, registration templates added
+### Chat, list, login, profile, registration templates added
 

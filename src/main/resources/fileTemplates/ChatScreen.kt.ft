@@ -35,7 +35,7 @@ import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.KeyboardArrowUp
-#if(${USE_TOP_APP_BAR_MENU_ICON} == true)
+#if(${USE_TOP_APP_BAR_OPTIONS_MENU_ICON} == true)
 import androidx.compose.material.icons.filled.MoreVert
 #end
 #if(${USE_TOP_APP_BAR_SEARCH_ICON} == true)
@@ -317,11 +317,11 @@ private fun ChatTopAppBar() {
                 )
             }
             #end
-            #if(${USE_TOP_APP_BAR_MENU_ICON} == true)
+            #if(${USE_TOP_APP_BAR_OPTIONS_MENU_ICON} == true)
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(
                     imageVector = Icons.Default.MoreVert,
-                    contentDescription = "Menu"
+                    contentDescription = "Options menu"
                 )
             }
             #end
