@@ -1,0 +1,354 @@
+package $PACKAGE_NAME
+
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+#end
+import androidx.compose.foundation.layout.Arrangement
+#if(${USE_ONE_LINE_LIST_ITEM} == false)
+import androidx.compose.foundation.layout.Column
+#end
+import androidx.compose.foundation.layout.Row
+#if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+import androidx.compose.foundation.layout.Spacer
+#end
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+#if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+import androidx.compose.foundation.layout.width
+#end
+import androidx.compose.foundation.lazy.LazyColumn
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.foundation.lazy.LazyListState
+#end
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.material.Icon
+#end
+import androidx.compose.material.Scaffold
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowUpward
+#end
+import androidx.compose.material.rememberScaffoldState
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.material3.FloatingActionButton
+#end
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+#end
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+#if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+import androidx.compose.ui.layout.ContentScale
+#end
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+#if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+import coil.compose.AsyncImage
+#end
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+#end
+
+@Composable
+fun ${LIST_NAME}ListScreen(
+
+) {
+    val scaffoldState = rememberScaffoldState()
+    val listState = rememberLazyListState()
+    #if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+    val coroutineScope = rememberCoroutineScope()
+
+    val showButton by remember {
+        derivedStateOf {
+            listState.firstVisibleItemIndex > 0
+        }
+    }
+
+    #end
+
+    Scaffold(
+        scaffoldState = scaffoldState,
+        #if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+        floatingActionButton = {
+            AnimatedVisibility(
+                visible = showButton,
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                ScrollToTopButton(coroutineScope, listState)
+            }
+        }
+        #end
+    ) {
+        LazyColumn(
+            state = listState
+        ) {
+            items(
+                // set items
+                items = listOf<Any>(),
+                key = { }
+            ) { item ->
+            #if(${USE_ONE_LINE_LIST_ITEM} == true)
+//                OneLineListItem("")
+            #end
+            #if(${USE_TWO_LINES_LIST_ITEM} == true)
+//                TwoLineListItem("")
+            #end
+            #if(${USE_THREE_LINES_LIST_ITEM} == true)
+//                ThreeLineListItem("")
+            #end
+            }
+        }
+    }
+}
+#if(${USE_ONE_LINE_LIST_ITEM} == true)
+
+@Composable
+private fun OneLineListItem(
+    imageUrl: String
+) {
+    Row(
+        modifier = Modifier
+            .height(56.dp)
+            .fillMaxWidth()
+            .padding(
+                start = 16.dp,
+                end = 24.dp,
+                #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+                top = 8.dp,
+                bottom = 8.dp
+                #end
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+    #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+    AsyncImage(
+            modifier = Modifier
+                .height(40.dp)
+                .width(40.dp),
+            model = imageUrl,
+            contentScale = ContentScale.Crop,
+            contentDescription = "Item image"
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+    #end
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text = "Headline",
+                overflow = TextOverflow.Ellipsis,
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.bodyLarge,
+                maxLines = 1
+            )
+        }
+    }
+}
+#end
+#if(${USE_TWO_LINES_LIST_ITEM} == true)
+
+@Composable
+private fun TwoLineListItem(
+    imageUrl: String
+) {
+    Row(
+        modifier = Modifier
+            .height(72.dp)
+            .fillMaxWidth()
+            .padding(
+                start = 16.dp,
+                end = 24.dp,
+                #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+                top = 8.dp,
+                bottom = 8.dp
+                #end
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+        AsyncImage(
+            modifier = Modifier
+                .height(56.dp)
+                .width(56.dp),
+            model = imageUrl,
+            contentScale = ContentScale.Crop,
+            contentDescription = "Item image"
+        )
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        #end
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = "Headline",
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1
+                )
+                Text(
+                    text = "Supporting text",
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 1
+                )
+            }
+        }
+    }
+}
+#end
+#if(${USE_THREE_LINES_LIST_ITEM} == true)
+
+@Composable
+private fun ThreeLineListItem(
+    imageUrl: String
+) {
+    Row(
+        modifier = Modifier
+            .height(88.dp)
+            .fillMaxWidth()
+            .padding(
+                start = 16.dp,
+                end = 24.dp,
+                #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+                top = 12.dp,
+                bottom = 12.dp
+                #end
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
+        Column(
+            verticalArrangement = Arrangement.Top
+        ) {
+            AsyncImage(
+                modifier = Modifier
+                    .height(56.dp)
+                    .width(56.dp),
+                model = imageUrl,
+                contentScale = ContentScale.Crop,
+                contentDescription = "Profile image"
+            )
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        #end
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(
+                    text = "Headline",
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    style = MaterialTheme.typography.bodyLarge,
+                    maxLines = 1
+                )
+                Text(
+                    text = "Supporting text\nSupporting text",
+                    overflow = TextOverflow.Ellipsis,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    style = MaterialTheme.typography.bodyMedium,
+                    maxLines = 2
+                )
+            }
+        }
+    }
+}
+#end
+#if(${USE_SCROLL_TO_TOP_BUTTON} == true)
+
+@Composable
+private fun ScrollToTopButton(
+    coroutineScope: CoroutineScope,
+    lazyColumnState: LazyListState
+) {
+    FloatingActionButton(
+        onClick = {
+            coroutineScope.launch {
+                lazyColumnState.animateScrollToItem(index = 0)
+            }
+        }
+    ) {
+        Icon(
+            imageVector = Icons.Default.ArrowUpward,
+            contentDescription = "Arrow upward"
+        )
+    }
+}
+#end
+#if(${USE_ONE_LINE_LIST_ITEM} == true)
+
+@Preview(
+    showBackground = true,
+    name = "One line list item"
+)
+@Composable
+private fun OneLineListItemPreview() {
+    OneLineListItem("")
+}
+#end
+#if(${USE_TWO_LINES_LIST_ITEM} == true)
+
+@Preview(
+    showBackground = true,
+    name = "Two line list item"
+)
+@Composable
+private fun TwoLineListItemPreview() {
+    TwoLineListItem("")
+}
+#end
+#if(${USE_THREE_LINES_LIST_ITEM} == true)
+
+@Preview(
+    showBackground = true,
+    name = "Three line list item"
+)
+@Composable
+private fun ThreeLineListItemPreview() {
+    ThreeLineListItem("")
+}
+#end
+
+@Preview(
+    showBackground = true,
+    #if(${LIST_NAME} != "") name = "${LIST_NAME} list screen"
+    #else name = "List screen"
+    #end
+)
+@Composable
+private fun ListScreenPreview() {
+    ${LIST_NAME}ListScreen()
+}
