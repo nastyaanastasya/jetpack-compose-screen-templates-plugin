@@ -23,7 +23,6 @@ class LoginDialog(
 
             row { checkBox("Use OutlinedTextField instead of TextField", viewModel::useOutlinedTextField) }
             row { checkBox("Set toggle password visibility icon", viewModel::useTrailingIcon) }
-            row { checkBox("Create 'Repeat password' field", viewModel::useRepPassword) }
             row { checkBox("Add 'Forget password?' link text", viewModel::useForgetPasswordText) }
 
             noteRow("Creates a login screen template file 'LoginScreen.kt'")

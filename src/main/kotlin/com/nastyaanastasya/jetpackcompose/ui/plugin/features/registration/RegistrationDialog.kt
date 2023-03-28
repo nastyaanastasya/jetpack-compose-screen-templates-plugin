@@ -23,6 +23,7 @@ class RegistrationDialog(
 
             row { checkBox("Use OutlinedTextField instead of TextField", viewModel::useOutlinedTextField) }
             row { checkBox("Set toggle password visibility icon", viewModel::useTrailingIcon) }
+            row { checkBox("Add 'Repeat password' field", viewModel::useRepPassword) }
             row { checkBox("Add 'Already registered? Sign In' link text", viewModel::useAlreadyRegisteredText) }
 
             noteRow("Creates a login screen template file 'RegistrationScreen.kt'")

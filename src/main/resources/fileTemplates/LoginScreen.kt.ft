@@ -63,9 +63,6 @@ fun LoginScreen(
 
     var email by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
-    #if (${USE_REP_PASSWORD} == "true")
-    var repPassword by rememberSaveable { mutableStateOf("") }
-    #end
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -101,16 +98,6 @@ fun LoginScreen(
                 focusManager = focusManager,
                 onValueChange = { password = it }
             )
-            #if (${USE_REP_PASSWORD} == "true")
-
-            PasswordField(
-                label = "Repeat password",
-                value = "",
-                placeholder = "repeat password",
-                focusManager = focusManager,
-                onValueChange = { repPassword = it }
-            )
-            #end
 
             LoginButton(
                 label = "Sign In",

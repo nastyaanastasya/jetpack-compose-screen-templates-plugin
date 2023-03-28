@@ -14,6 +14,7 @@ class RegistrationViewModel(
         private val editorManager: FileEditorManager,
 ) : BaseViewModel() {
 
+    var useRepPassword = false
     var useAlreadyRegisteredText = false
     var useOutlinedTextField = false
     var useTrailingIcon = false
@@ -22,6 +23,7 @@ class RegistrationViewModel(
 
     fun onOkButtonClick() {
         val properties = mutableMapOf<String, Any>(
+                PropertyKeys.UseRepPassword to useRepPassword,
                 PropertyKeys.UseAlreadyRegisteredText to useAlreadyRegisteredText,
                 PropertyKeys.UseOutlinedTextField to useOutlinedTextField,
                 PropertyKeys.UseTrailingIcon to useTrailingIcon

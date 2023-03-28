@@ -15,7 +15,6 @@ class LoginViewModel(
 ) : BaseViewModel() {
 
     var useForgetPasswordText = false
-    var useRepPassword = false
     var useOutlinedTextField = false
     var useTrailingIcon = false
 
@@ -23,7 +22,6 @@ class LoginViewModel(
 
     fun onOkButtonClick() {
         val properties = mutableMapOf<String, Any>(
-            PropertyKeys.UseRepPassword to useRepPassword,
             PropertyKeys.UseForgetPasswordText to useForgetPasswordText,
             PropertyKeys.UseOutlinedTextField to useOutlinedTextField,
             PropertyKeys.UseTrailingIcon to useTrailingIcon
