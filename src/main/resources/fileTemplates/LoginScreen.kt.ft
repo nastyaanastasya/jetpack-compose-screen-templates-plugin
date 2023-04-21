@@ -31,9 +31,6 @@ import androidx.compose.material.icons.filled.VisibilityOff
 #end
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-#if (${USE_TRAILING_ICON} == "true")
-import androidx.compose.runtime.derivedStateOf
-#end
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 #if (${USE_TRAILING_ICON} == "true")
@@ -84,7 +81,7 @@ fun LoginScreen(
             // email
             EmailField(
                 label = "Email",
-                value = "",
+                value = email,
                 placeholder = "email@example.com",
                 focusManager = focusManager,
                 onValueChange = { email = it }
@@ -93,7 +90,7 @@ fun LoginScreen(
             // password
             PasswordField(
                 label = "Password",
-                value = "",
+                value = password,
                 placeholder = "password",
                 focusManager = focusManager,
                 onValueChange = { password = it }
@@ -168,12 +165,7 @@ private fun PasswordField(
     focusManager: FocusManager,
     onValueChange: (String) -> Unit,
 ) {
-    #if (${USE_TRAILING_ICON} == "true")
-    val isVisible by remember {
-        derivedStateOf {
-            value.isNotBlank()
-        }
-    }
+#if (${USE_TRAILING_ICON} == "true")
     var visibility by remember { mutableStateOf(false) }
     val trailingIcon = if (visibility) {
         Icons.Filled.Visibility
@@ -218,15 +210,13 @@ private fun PasswordField(
         keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
         #if (${USE_TRAILING_ICON} == "true")
         trailingIcon = {
-            if (isVisible) {
-                IconButton(onClick = {
-                    visibility = !visibility
-                }) {
-                    Icon(
-                        imageVector = trailingIcon,
-                        contentDescription = "Clear text"
-                    )
-                }
+            IconButton(onClick = {
+                visibility = !visibility
+            }) {
+                Icon(
+                    imageVector = trailingIcon,
+                    contentDescription = "Clear text"
+                )
             }
         }
         #end
