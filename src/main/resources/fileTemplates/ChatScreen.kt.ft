@@ -53,6 +53,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -150,14 +151,16 @@ fun MessageContent(
             Column(verticalArrangement = Arrangement.Top) {
 
                 // sender name
-                Text(
-                    text = senderName,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    modifier = Modifier
-                        .align(alignment)
-                        .padding(bottom = 4.dp)
-                )
+                if (!isLocal) {
+                    Text(
+                        text = senderName,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier
+                            .align(alignment)
+                            .padding(bottom = 4.dp)
+                    )
+                }
 
                 // messages
                 Surface(
@@ -226,7 +229,8 @@ private fun EmptyChatContent(
         Text(
             text = text,
             modifier = Modifier.fillMaxWidth(),
-            style = MaterialTheme.typography.titleMedium,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
         )
     }
@@ -238,6 +242,7 @@ fun MessageTextField(
 
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
+    val textState = remember { mutableStateOf(TextFieldValue()) }
 
     Row(
         modifier = Modifier
@@ -256,9 +261,9 @@ fun MessageTextField(
         #else
         TextField(
         #end
-            value = "",
-            onValueChange = { /*TODO*/ },
-            label = {
+            value = textState.value,
+            onValueChange = { textState.value = it },
+            placeholder = {
                 Text(
                     text = "Message",
                     style = MaterialTheme.typography.bodyLarge,
