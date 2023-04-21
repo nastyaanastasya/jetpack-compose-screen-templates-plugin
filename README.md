@@ -1,42 +1,62 @@
-# jetpack-compose-screen-templates-plugin
+# Jetpack Compose Screen Templates Plugin
 
 ![Build](https://github.com/nastyaanastasya/jetpack-compose-screen-templates-plugin/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-
-## Template ToDo list
-- [x] Create a new [IntelliJ Platform Plugin Template][template] project.
-- [ ] Get familiar with the [template documentation][template].
-- [ ] Verify the [pluginGroup](./gradle.properties), [plugin ID](./src/main/resources/META-INF/plugin.xml) and [sources package](./src/main/kotlin).
-- [ ] Review the [Legal Agreements](https://plugins.jetbrains.com/docs/marketplace/legal-agreements.html?from=IJPluginTemplate).
-- [ ] [Publish a plugin manually](https://plugins.jetbrains.com/docs/intellij/publishing-plugin.html?from=IJPluginTemplate) for the first time.
-- [ ] Set the Plugin ID in the above README badges.
-- [ ] Set the [Plugin Signing](https://plugins.jetbrains.com/docs/intellij/plugin-signing.html?from=IJPluginTemplate) related [secrets](https://github.com/JetBrains/intellij-platform-plugin-template#environment-variables).
-- [ ] Set the [Deployment Token](https://plugins.jetbrains.com/docs/marketplace/plugin-upload.html?from=IJPluginTemplate).
-- [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
-
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
-
-To keep everything working, do not remove `<!-- ... -->` sections. 
+Jetpack Compose Screen Templates Plugin provides a set of templates for different app's screen types to make the development faster.
 <!-- Plugin description end -->
 
-## Installation
+### Plugin provides following types of screen templates:
+- ChatScreen Template
+- ListScreen Template
+- LoginScreen Template
+- ProfileScreen Template
+- RegistrationScreen Template
 
-- Using IDE built-in plugin system:
-  
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>Marketplace</kbd> > <kbd>Search for "jetpack-compose-screen-templates-plugin"</kbd> >
-  <kbd>Install Plugin</kbd>
-  
-- Manually:
+## ChatScreen
+Creates file ChatScreen.kt
 
-  Download the [latest release](https://github.com/nastyaanastasya/jetpack-compose-screen-templates-plugin/releases/latest) and install it manually using
-  <kbd>Settings/Preferences</kbd> > <kbd>Plugins</kbd> > <kbd>⚙️</kbd> > <kbd>Install plugin from disk...</kbd>
+### For this type of screen following settings can be applied:
+- The presence or abbsence of TopAppBar and its action icons
 
+https://user-images.githubusercontent.com/71032910/233702930-e7ce6c2b-e7d2-495a-8c23-ff7312a94606.mp4
 
----
-Plugin based on the [IntelliJ Platform Plugin Template][template].
+## ListScreen
+Creates file (Prefix)ListScreen.kt (prefix can be null)
 
-[template]: https://github.com/JetBrains/intellij-platform-plugin-template
+### For this type of screen following settings can be applied:
+- Which list item to use: one-line, two-line or three-line (with image or without it)
+- The presence or abbsence of TopAppBar and its action and navigation icons
+- The presence or abbsence of scroll-to-top FloatingActionButton
+
+https://user-images.githubusercontent.com/71032910/233705100-64e7067c-bf63-4482-968f-9c5d802fabc4.mp4
+
+## LoginScreen
+Creates file LoginScreen.kt
+
+### For this type of screen following settings can be applied:
+- The presence or abbsence of toggle password visibility icon
+- The presence or abbsence of 'Forget password?' link text
+- Which type of TextFields to use: outlined or filled
+
+https://user-images.githubusercontent.com/71032910/233710154-51e2f1e9-cd8f-44fe-b96c-66dcd6ce280d.mp4
+
+## ProfileScreen
+Creates file ProfileScreen.kt
+
+### For this type of screen following settings can be applied:
+- The presence or abbsence of options menu icon on TopAppBar
+- Which navigation icon to set on TopAppBar 
+
+<img src="https://user-images.githubusercontent.com/71032910/233705294-bdef0700-d566-4e93-b20d-3feddc8fbeeb.jpg" width="320" heigth="600"/>
+
+## RegistgrationScreen
+Creates file RegistrationScreen.kt
+
+### For this type of screen following settings can be applied:
+- The presence or abbsence of toggle password visibility icon
+- The presence or abbsence of 'Already registered? Sign In' link text
+- The presence or abbsence of 'Repeat password' TextField
+- Which type of TextFields to use: outlined or filled
+
+https://user-images.githubusercontent.com/71032910/233710201-563c0e4f-e22d-49c0-b778-21632280a0f1.mp4

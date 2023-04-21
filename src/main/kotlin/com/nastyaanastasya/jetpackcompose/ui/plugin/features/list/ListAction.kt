@@ -1,0 +1,18 @@
+package com.nastyaanastasya.jetpackcompose.ui.plugin.features.list
+
+import com.intellij.openapi.actionSystem.AnAction
+import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.psi.PsiDirectory
+import com.nastyaanastasya.jetpackcompose.ui.plugin.dependencies.ProjectDependencies
+import com.nastyaanastasya.jetpackcompose.ui.plugin.features.list.injection.ListViewModelFactory
+
+class ListAction: AnAction() {
+
+    override fun actionPerformed(e: AnActionEvent) {
+        val dependencies = ProjectDependencies(e.project)
+        val directory = e.getData(CommonDataKeys.PSI_ELEMENT) as PsiDirectory
+        val viewModel = ListViewModelFactory.create(directory, dependencies)
+        ListDialog(viewModel).show()
+    }
+}

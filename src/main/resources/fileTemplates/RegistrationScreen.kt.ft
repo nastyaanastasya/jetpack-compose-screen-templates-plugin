@@ -1,0 +1,301 @@
+package $PACKAGE_NAME
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
+import androidx.compose.foundation.layout.Row
+#end
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+#if (${USE_TRAILING_ICON} == "true")
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+#end
+#if (${USE_OUTLINED_TEXT_FIELD} == "true")
+import androidx.compose.material.OutlinedTextField
+#else
+import androidx.compose.material.TextField
+#end
+import androidx.compose.material.Text
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
+import androidx.compose.material.TextButton
+#end
+#if (${USE_TRAILING_ICON} == "true")
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+#end
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+#if (${USE_TRAILING_ICON} == "true")
+import androidx.compose.runtime.remember
+#end
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
+import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+#if (${USE_TRAILING_ICON} == "true")
+import androidx.compose.ui.text.input.VisualTransformation
+#end
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+
+@Composable
+fun RegistrationScreen(
+
+) {
+    val focusManager = LocalFocusManager.current
+
+    var email by rememberSaveable { mutableStateOf("") }
+    var password by rememberSaveable { mutableStateOf("") }
+    #if (${USE_REP_PASSWORD} == "true")
+    var repPassword by rememberSaveable { mutableStateOf("") }
+    #end
+
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .fillMaxSize()
+            .clickable { focusManager.clearFocus() }
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(
+                space = 16.dp,
+                alignment = Alignment.Bottom
+            ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            RegistrationText(value = "Registration")
+
+            // email
+            EmailField(
+                label = "Email",
+                value = email,
+                placeholder = "email@example.com",
+                focusManager = focusManager,
+                onValueChange = { email = it }
+            )
+
+            // password
+            PasswordField(
+                label = "Password",
+                value = password,
+                placeholder = "password",
+                focusManager = focusManager,
+                onValueChange = { password = it }
+            )
+            #if (${USE_REP_PASSWORD} == "true")
+
+            //repeat password
+            PasswordField(
+                label = "Repeat password",
+                value = repPassword,
+                placeholder = "repeat password",
+                focusManager = focusManager,
+                onValueChange = { repPassword = it }
+            )
+            #end
+
+            RegistrationButton(
+                label = "Sign Up",
+                focusManager = focusManager,
+                onClick = { /*TODO*/ }
+            )
+            #if (${USE_ALREADY_REGISTERED_TEXT} == "true")
+
+            LoginText()
+            #end
+        }
+    }
+}
+
+@Composable
+private fun RegistrationText(
+    value: String
+) {
+    Text(
+        text = value,
+        fontWeight = FontWeight.Bold,
+        style = MaterialTheme.typography.headlineMedium,
+        color = MaterialTheme.colorScheme.primary
+    )
+}
+
+@Composable
+private fun EmailField(
+    label: String,
+    value: String,
+    placeholder: String,
+    focusManager: FocusManager,
+    onValueChange: (String) -> Unit
+) {
+    #if (${USE_OUTLINED_TEXT_FIELD} == "true")
+    OutlinedTextField(
+    #else
+    TextField(
+    #end
+        value = value,
+        placeholder = {
+            Text(
+                text = placeholder,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        label = {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Email
+        ),
+        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() })
+    )
+}
+
+@Composable
+private fun PasswordField(
+    label: String,
+    value: String,
+    placeholder: String,
+    focusManager: FocusManager,
+    onValueChange: (String) -> Unit,
+) {
+#if (${USE_TRAILING_ICON} == "true")
+
+    var visibility by remember { mutableStateOf(false) }
+    val trailingIcon = if (visibility) {
+        Icons.Filled.Visibility
+    } else {
+        Icons.Filled.VisibilityOff
+    }
+    #end
+
+    #if (${USE_OUTLINED_TEXT_FIELD} == "true")
+    OutlinedTextField(
+    #else
+    TextField(
+    #end
+        value = value,
+        placeholder = {
+            Text(
+                text = placeholder,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        label = {
+            Text(
+                text = label,
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        },
+        onValueChange = onValueChange,
+        #if (${USE_TRAILING_ICON} == "true")
+        visualTransformation = if (visibility) {
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+        },
+        #else
+        visualTransformation = PasswordVisualTransformation(),
+        #end
+        keyboardOptions = KeyboardOptions(
+            imeAction = ImeAction.Done,
+            keyboardType = KeyboardType.Password
+        ),
+        keyboardActions = KeyboardActions(onDone = { focusManager.clearFocus() }),
+        #if (${USE_TRAILING_ICON} == "true")
+        trailingIcon = {
+            IconButton(onClick = {
+                visibility = !visibility
+            }) {
+                Icon(
+                    imageVector = trailingIcon,
+                    contentDescription = "Clear text"
+                )
+            }
+        }
+        #end
+    )
+}
+
+@Composable
+private fun RegistrationButton(
+    label: String,
+    focusManager: FocusManager,
+    onClick: () -> Unit
+) {
+    Button(
+        modifier = Modifier.width(280.dp),
+        shape = CircleShape,
+        onClick = {
+            onClick()
+            focusManager.clearFocus()
+        },
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = MaterialTheme.colorScheme.primary,
+            contentColor = MaterialTheme.colorScheme.onPrimary
+        )
+    ) {
+        Text(
+            text = label,
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+#if (${USE_ALREADY_REGISTERED_TEXT} == "true")
+
+@Composable
+private fun LoginText() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = "Already registered?",
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.secondary
+        )
+        TextButton(
+            onClick = { /*TODO*/ }
+        ) {
+            Text(
+                text = "Sign In",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+    }
+}
+#end
+
+
+@Preview(
+    showBackground = true,
+    name = "Registration screen"
+)
+@Composable
+private fun RegistrationScreenPreview() {
+    RegistrationScreen()
+}

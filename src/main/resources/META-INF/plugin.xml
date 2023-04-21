@@ -1,18 +1,47 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.nastyaanastasya.jetpackcomposescreentemplatesplugin</id>
-    <name>IntelliJ Platform Plugin jetpack-compose-screen-templates-plugin</name>
-    <vendor>nastyaanastasya</vendor>
+    <id>com.nastyaanastasya.jetpackcompose.ui.plugin</id>
+    <name>Jetpack Compose Screen Templates</name>
+    <vendor url="https://github.com/nastyaanastasya">Chukhina Anastasia</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.nastyaanastasya.jetpackcomposescreentemplatesplugin.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.nastyaanastasya.jetpackcomposescreentemplatesplugin.services.MyProjectService"/>
-    </extensions>
+    <actions>
+        <group id="JetpackComposeScreenTemplates" text="Group">
+            <add-to-group group-id="NewGroup" anchor="first"/>
 
-    <applicationListeners>
-        <listener class="com.github.nastyaanastasya.jetpackcomposescreentemplatesplugin.listeners.MyProjectManagerListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener"/>
-    </applicationListeners>
+            <group id="JetpackCompose.NewMenu.Screen"
+                   icon="/icons/icon_small.svg"
+                   popup="true"
+                   text="Jetpack Compose Screen Templates">
+
+                <action
+                        id="ComposeScreenTemplates.Chat"
+                        text="Chat Screen Template"
+                        description="Creates Compose chat screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.chat.ChatAction"/>
+                <action
+                        id="ComposeScreenTemplates.List"
+                        text="List Screen Template"
+                        description="Creates Compose list screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.list.ListAction"/>
+                <action
+                        id="ComposeScreenTemplates.Login"
+                        text="Login Screen Template"
+                        description="Creates Compose login screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.login.LoginAction"/>
+                <action
+                        id="ComposeScreenTemplates.Profile"
+                        text="Profile Screen Template"
+                        description="Creates Compose profile screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.profile.ProfileAction"/>
+                <action
+                        id="ComposeScreenTemplates.Registration"
+                        text="Registration Screen Template"
+                        description="Creates Compose registration screen template"
+                        class="com.nastyaanastasya.jetpackcompose.ui.plugin.features.registration.RegistrationAction"/>
+            </group>
+
+        </group>
+    </actions>
 </idea-plugin>

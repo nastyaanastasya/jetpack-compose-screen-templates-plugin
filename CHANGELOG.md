@@ -1,7 +1,8 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# jetpack-compose-screen-templates-plugin Changelog
+# Jetpack Compose Templates Plugin Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+## 0.0.1
+### Chat, list, login, profile, registration templates added
+
