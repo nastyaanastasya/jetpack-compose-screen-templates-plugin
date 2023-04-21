@@ -71,13 +71,12 @@ fun ProfileScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 32.dp),
-                verticalAlignment = Alignment.CenterVertically
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                ProfilePostsText(value = "50")
-                Spacer(modifier = Modifier.width(52.dp))
+                ProfilePostsText(value = "0")
                 ProfileImage(imageUrl = null)
-                Spacer(modifier = Modifier.width(30.dp))
-                ProfileFollowersText(value = "1.2K")
+                ProfileFollowersText(value = "0")
             }
             ProfileNameText(value = "Lorem Ipsum")
             ProfileDescriptionText(value = "Lorem ipsum dolor sit amet")
@@ -122,24 +121,27 @@ private fun ProfileFollowButton(
 private fun ProfilePostsText(
     value: String
 ) {
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(
-            text = value,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.primary,
-            style = MaterialTheme.typography.bodyLarge
-        )
-        Text(
-            text = "Posts",
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Normal,
-            color = MaterialTheme.colorScheme.secondary,
-            style = MaterialTheme.typography.labelLarge
-        )
+    Row {
+        Column(
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = value,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary,
+                style = MaterialTheme.typography.bodyLarge
+            )
+            Text(
+                text = "Posts",
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Normal,
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.labelLarge
+            )
+        }
+        Spacer(modifier = Modifier.width(4.dp))
     }
 }
 
