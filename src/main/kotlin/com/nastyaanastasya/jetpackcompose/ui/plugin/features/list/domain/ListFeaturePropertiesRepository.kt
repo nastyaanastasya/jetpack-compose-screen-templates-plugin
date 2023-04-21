@@ -12,6 +12,7 @@ class ListFeaturePropertiesRepository(
         dataSource.put(TwoLinesListItem, properties.useTwoLinesListItem)
         dataSource.put(ThreeLinesListItem, properties.useThreeLinesListItem)
         dataSource.put(ListItemWithImage, properties.useListItemWithImage)
+        dataSource.put(ListTopAppBar, properties.useListTopAppBar)
     }
 
     fun get(): ListFeatureProperties {
@@ -20,7 +21,8 @@ class ListFeaturePropertiesRepository(
                 useOneLineListItem = dataSource.get(OneLineListItem),
                 useTwoLinesListItem = dataSource.get(TwoLinesListItem),
                 useThreeLinesListItem = dataSource.get(ThreeLinesListItem),
-                useListItemWithImage = dataSource.get(ListItemWithImage)
+                useListItemWithImage = dataSource.get(ListItemWithImage),
+                useListTopAppBar = dataSource.get(ListTopAppBar)
         )
     }
 
@@ -30,5 +32,6 @@ class ListFeaturePropertiesRepository(
         private const val TwoLinesListItem = "two_lines_list_item"
         private const val ThreeLinesListItem = "three_lines_list_item"
         private const val ListItemWithImage = "list_item_with_image"
+        private const val ListTopAppBar = "list_top_app_bar"
     }
 }

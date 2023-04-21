@@ -5,5 +5,6 @@ data class ListFeatureProperties(
         val useOneLineListItem: Boolean,
         val useTwoLinesListItem: Boolean,
         val useThreeLinesListItem: Boolean,
-        val useListItemWithImage: Boolean
+        val useListItemWithImage: Boolean,
+        val useListTopAppBar: Boolean
 )

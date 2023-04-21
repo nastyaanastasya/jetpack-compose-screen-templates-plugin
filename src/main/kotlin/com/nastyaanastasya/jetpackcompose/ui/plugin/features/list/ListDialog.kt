@@ -23,6 +23,7 @@ class ListDialog(
 
             row { label("Enter prefix for file name '<prefix>ListScreen.kt'") }
             row { textField(viewModel::listName).focused() }
+            row { checkBox("Set top app bar for list screen", viewModel::useListTopAppBar) }
             row { label("") }
 
             row { label("Which type of list item do you want to use?") }

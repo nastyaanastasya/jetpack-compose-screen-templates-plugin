@@ -13,6 +13,7 @@ object PropertyKeys {
 
     const val UseAlreadyRegisteredText = "USE_ALREADY_REGISTERED_TEXT"
 
+    const val UseListTopAppBar = "USE_LIST_TOP_APP_BAR"
     const val UseOneLineListItem = "USE_ONE_LINE_LIST_ITEM"
     const val UseTwoLineListItem = "USE_TWO_LINES_LIST_ITEM"
     const val UseThreeLineListItem = "USE_THREE_LINES_LIST_ITEM"

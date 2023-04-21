@@ -19,6 +19,10 @@ class ListViewModel(
     var listName: String = ""
         get() = field.capitalize()
 
+    var useListTopAppBar: Boolean
+        get() = repository.get().useListTopAppBar
+        set(value) = repository.put(repository.get().copy(useListTopAppBar = value))
+
     var useOneLineListItem: Boolean
         get() = repository.get().useOneLineListItem
         set(value) = repository.put(repository.get().copy(useOneLineListItem = value))
@@ -44,6 +48,7 @@ class ListViewModel(
     fun onOkButtonClick() {
         val properties = mutableMapOf<String, Any>(
                 PropertyKeys.ListName to listName,
+                PropertyKeys.UseListTopAppBar to useListTopAppBar,
                 PropertyKeys.UseOneLineListItem to useOneLineListItem,
                 PropertyKeys.UseTwoLineListItem to useTwoLinesListItem,
                 PropertyKeys.UseThreeLineListItem to useThreeLinesListItem,

@@ -28,10 +28,22 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 #if(${USE_SCROLL_TO_TOP_BUTTON} == true)
 import androidx.compose.material.Icon
 #end
+#if(${USE_LIST_TOP_APP_BAR} == true)
+import androidx.compose.material.IconButton
+#end
 import androidx.compose.material.Scaffold
+#if(${USE_LIST_TOP_APP_BAR} == true)
+import androidx.compose.material.TopAppBar
+#end
 #if(${USE_SCROLL_TO_TOP_BUTTON} == true)
 import androidx.compose.material.icons.Icons
+#if(${USE_LIST_TOP_APP_BAR} == true)
+import androidx.compose.material.icons.filled.ArrowBack
+#end
 import androidx.compose.material.icons.filled.ArrowUpward
+#end
+#if(${USE_LIST_TOP_APP_BAR} == true)
+import androidx.compose.material.icons.filled.MoreVert
 #end
 import androidx.compose.material.rememberScaffoldState
 #if(${USE_SCROLL_TO_TOP_BUTTON} == true)
@@ -51,6 +63,9 @@ import androidx.compose.ui.Modifier
 #if(${USE_LIST_ITEM_WITH_IMAGE} == true)
 import androidx.compose.ui.layout.ContentScale
 #end
+#if(${USE_LIST_TOP_APP_BAR} == true)
+import androidx.compose.ui.text.style.TextAlign
+#end
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -61,6 +76,8 @@ import coil.compose.AsyncImage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 #end
+
+private const val IMAGE_URL_MOCK = "https://developer.android.com/static/assets/images/resource-card-default-android.jpg"
 
 @Composable
 fun ${LIST_NAME}ListScreen(
@@ -90,7 +107,10 @@ fun ${LIST_NAME}ListScreen(
             ) {
                 ScrollToTopButton(coroutineScope, listState)
             }
-        }
+        },
+        #if(${USE_LIST_TOP_APP_BAR} == true)
+        topBar = { ${LIST_NAME}ListTopAppBar() }
+        #end
         #end
     ) {
         LazyColumn(
@@ -102,18 +122,54 @@ fun ${LIST_NAME}ListScreen(
                 key = { }
             ) { item ->
             #if(${USE_ONE_LINE_LIST_ITEM} == true)
-//                OneLineListItem("")
+//                OneLineListItem(IMAGE_URL_MOCK)
             #end
             #if(${USE_TWO_LINES_LIST_ITEM} == true)
-//                TwoLineListItem("")
+//                TwoLineListItem(IMAGE_URL_MOCK)
             #end
             #if(${USE_THREE_LINES_LIST_ITEM} == true)
-//                ThreeLineListItem("")
+//                ThreeLineListItem(IMAGE_URL_MOCK)
             #end
             }
         }
     }
 }
+#if(${USE_LIST_TOP_APP_BAR} == true)
+
+@Composable
+private fun ${LIST_NAME}ListTopAppBar() {
+    TopAppBar(
+        modifier = Modifier.fillMaxWidth(),
+        title = {
+            Text(
+                text = "List",
+                overflow = TextOverflow.Ellipsis,
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                maxLines = 1
+            )
+        },
+        navigationIcon = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Arrow back"
+                )
+            }
+        },
+        actions = {
+            IconButton(onClick = { /*TODO*/ }) {
+                Icon(
+                    imageVector = Icons.Default.MoreVert,
+                    contentDescription = "Show more"
+                )
+            }
+        },
+        backgroundColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface
+    )
+}
+#end
 #if(${USE_ONE_LINE_LIST_ITEM} == true)
 
 @Composable
@@ -308,6 +364,17 @@ private fun ScrollToTopButton(
     }
 }
 #end
+#if(${USE_LIST_TOP_APP_BAR} == true)
+
+@Preview(
+    showBackground = true,
+    name = "Top app bar"
+)
+@Composable
+private fun ${LIST_NAME}ListTopAppBarPreview() {
+    ${LIST_NAME}ListTopAppBar()
+}
+#end
 #if(${USE_ONE_LINE_LIST_ITEM} == true)
 
 @Preview(
@@ -316,7 +383,7 @@ private fun ScrollToTopButton(
 )
 @Composable
 private fun OneLineListItemPreview() {
-    OneLineListItem("")
+    OneLineListItem(IMAGE_URL_MOCK)
 }
 #end
 #if(${USE_TWO_LINES_LIST_ITEM} == true)
@@ -327,7 +394,7 @@ private fun OneLineListItemPreview() {
 )
 @Composable
 private fun TwoLineListItemPreview() {
-    TwoLineListItem("")
+    TwoLineListItem(IMAGE_URL_MOCK)
 }
 #end
 #if(${USE_THREE_LINES_LIST_ITEM} == true)
@@ -338,7 +405,7 @@ private fun TwoLineListItemPreview() {
 )
 @Composable
 private fun ThreeLineListItemPreview() {
-    ThreeLineListItem("")
+    ThreeLineListItem(IMAGE_URL_MOCK)
 }
 #end
 
